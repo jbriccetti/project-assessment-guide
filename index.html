@@ -1,0 +1,145 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+        integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <style>
+        div.col-sm,
+        div.col-md,
+        div.col-lg,
+        div.col-xl,
+        label {
+            border: 0px solid black;
+
+
+        }
+        .row-labels{
+            margin-top: 25px;
+        }
+        .title{
+            font-size:1.25rem;
+        }
+        .predictive {
+            text-align: left;
+        }
+
+        .adaptive {
+            text-align: right;
+        }
+    </style>
+    <title>Troy Web Project Assessment Guide</title>
+</head>
+
+<body>
+
+    <div class="jumbotron jumbotron-fluid">
+        <div class="container">
+            <h1 class="display-4">Project Approach Assessment</h1>
+        </div>
+    </div>
+
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md predictive title">
+                Predictive (Plan Driven)
+            </div>
+            <div class="col-md adaptive title">
+                Adaptive (Change Driven)
+            </div>
+
+
+        </div>
+        <form>
+            <div class="container-fluid">
+                <div class="row row-labels">
+                    <div class="col-md predictive">
+                        <label class="predictive" for="bizProcessRange">Well Defined Business Processes</label>
+                    </div>
+                    <div class="col-md adaptive">
+                        <label class="adaptive" for="bizProcessRange">Not Well Defined Business Processes</label>
+                    </div>
+
+
+                </div>
+                <div class="row">
+                    <div class="col-xl">
+
+                        <div class="form-group">
+                            <input type="range" class="form-control-range" id="bizProcessRange">
+                        </div>
+
+                    </div>
+                </div>
+                <div class="row row-labels">
+                    <div class="col-md predictive">
+                        <label class="predictive" for="formControlRange">Stakeholder Availability is constrained</label>
+                    </div>
+                    <div class="col-md adaptive">
+                        <label class="adaptive" for="formControlRange">Stakeholders are highly available</label>
+                    </div>
+
+
+                </div>
+                <div class="row">
+                    <div class="col-xl">
+
+                        <div class="form-group">
+                            <input type="range" class="form-control-range" id="formControlRange">
+                        </div>
+
+                    </div>
+                </div>
+        </form>
+
+
+    </div>
+
+    <div id="result">result is: <b>xxx</b></div>
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
+        integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+        integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+        crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
+        integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
+        crossorigin="anonymous"></script>
+    <script>
+        $(document).ready(function(){
+            // Read value on page load
+            $("#result b").html($("#bizProcessRange").val());
+
+            // Read value on change
+            $("#bizProcessRange").change(function(){
+                $("#result b").html($(this).val());
+            });
+
+            $( "label[for='bizProcessRange']").click(function(){
+                let x=$("#bizProcessRange").val();
+                console.log("x was"+x);
+                if ($(this).hasClass("predictive")){
+                    if (x >= 10) x-=10; 
+                    console.log("x is now "+x);
+                }
+                if ($(this).hasClass("adaptive")){
+                    if (x <= 90) x=x*1+10; 
+                    console.log("x is now "+x);
+                }
+                $("#bizProcessRange").val(x);
+
+            });
+        }); 
+
+    </script>
+
+    </body>
+
+</html>
