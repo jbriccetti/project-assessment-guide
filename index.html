@@ -78,10 +78,10 @@
                 </div>
                 <div class="row row-labels">
                     <div class="col-md predictive">
-                        <label class="predictive" for="formControlRange">Stakeholder Availability is constrained</label>
+                        <label class="predictive" for="stakeholderAvail">Stakeholder Availability is constrained</label>
                     </div>
                     <div class="col-md adaptive">
-                        <label class="adaptive" for="formControlRange">Stakeholders are highly available</label>
+                        <label class="adaptive" for="stakeholderAvail">Stakeholders are highly available</label>
                     </div>
 
 
@@ -90,7 +90,7 @@
                     <div class="col-xl">
 
                         <div class="form-group">
-                            <input type="range" class="form-control-range" id="formControlRange">
+                            <input type="range" class="form-control-range" id="stakeholderAvail">
                         </div>
 
                     </div>
@@ -100,7 +100,6 @@
 
     </div>
 
-    <div id="result">result is: <b>xxx</b></div>
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
     <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
@@ -114,26 +113,17 @@
         crossorigin="anonymous"></script>
     <script>
         $(document).ready(function(){
-            // Read value on page load
-            $("#result b").html($("#bizProcessRange").val());
-
-            // Read value on change
-            $("#bizProcessRange").change(function(){
-                $("#result b").html($(this).val());
-            });
-
-            $( "label[for='bizProcessRange']").click(function(){
-                let x=$("#bizProcessRange").val();
-                console.log("x was"+x);
-                if ($(this).hasClass("predictive")){
-                    if (x >= 10) x-=10; 
-                    console.log("x is now "+x);
-                }
-                if ($(this).hasClass("adaptive")){
-                    if (x <= 90) x=x*1+10; 
-                    console.log("x is now "+x);
-                }
-                $("#bizProcessRange").val(x);
+            $( "label").click(function(){
+                // get reference to the form control that goes with this label and then select it with jquery
+                let slider = $("#"+$(this).attr("for"));
+                let currentVal = slider.val();
+                // figure out if i'm going to increment or decrement the control. we will assume it's a decrement, unless it has the class "adaptive"
+                let up = $(this).hasClass("adaptive");
+                let newVal = currentVal;
+                
+                if(up && currentVal <= 90) newVal=newVal*1+10;
+                if(!up && currentVal >= 10) newVal -=10;
+                $(slider).val(newVal);  
 
             });
         }); 
